@@ -8,7 +8,7 @@ import os
 from matplotlib import ticker
 
 
-PROJECT_PATH = "YOUR DIRECTORY"
+PROJECT_PATH = None
 if PROJECT_PATH:
     os.chdir(PROJECT_PATH)
 CATEGORIES = [["Neoplasms"], ["Cardiovascular Diseases"], ["Digestive System Diseases"], ["Endocrine System Diseases"], ["Hemic and Lymphatic Diseases"], ["Immune System Diseases"], ["Metabolic Diseases"], ["Mental Disorders", "Nervous System Diseases"], ["Obesity"], ["Respiratory Tract Diseases"], ["Urogenital Diseases"]]
@@ -55,7 +55,7 @@ def calculate_points(count_dictionary, input_cat):
     i = 1
     if isinstance(input_cat, str):
         cat = "metabolic_diseases" if input_cat == "metabolic" else input_cat
-        df = pd.read_csv(f"probe/{cat}_all_probes.csv")
+        df = pd.read_csv(f"data/probe/{cat}_all_probes.csv")
     else:
         df = input_cat
     while i <= probe_cutoff:
@@ -152,7 +152,7 @@ def breakdown(df, term_pmcid_map, disease, cat_index, output=None, show_figure=F
 
 def export_paper(broad_cat, diseases_name):
     cat = "metabolic_diseases" if broad_cat == "metabolic" else broad_cat
-    neuro_df = pd.read_csv(f"probe/{cat}_all_probes.csv")
+    neuro_df = pd.read_csv(f"data/probe/{cat}_all_probes.csv")
     if broad_cat == "metabolic":
         neuro_df["Filtered Mesh Term"] = neuro_df["Filtered Mesh Term"].apply(eval)
     else:
