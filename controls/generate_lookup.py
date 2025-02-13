@@ -14,32 +14,32 @@ import sys
 chr = sys.argv[1] 
 
 # bed file for gene bodies, promoters (padded 3kb), and three prime regions (padded 3kb), all obtained from UCSC
-gb = pd.read_csv('hg38_gene_bodies.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+gb = pd.read_csv('data/humanData/hg38_gene_bodies.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 gb = gb[gb['chr'] == chr]
 
-fivep = pd.read_csv('hg38_promoters_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+fivep = pd.read_csv('data/humanData/hg38_promoters_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 fivep = fivep[fivep['chr'] == chr]
 
-threep = pd.read_csv('hg38_three_prime_region_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+threep = pd.read_csv('data/humanData/hg38_three_prime_region_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 threep = threep[threep['chr'] == chr]
 
 # 100bp bin-level annotation of CpG counts, TSS counts, GB counts, EPIC probe counts, bins overlapping CoRSIVs removed 
-bins = pd.read_csv(f"{chr}_no_corsiv.csv")
+bins = pd.read_csv(f"{chr}_no_corsiv.csv") # this is in bin_level_data.zip
 
 # bed file for EPIC probes
-epic = pd.read_csv('EPIC.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
+epic = pd.read_csv('data/humanData/Illumina/EPIC.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
 epic = epic[epic['chr'] == chr]
 
 # bed file for HM450 probes
-hm450 = pd.read_csv('HM450.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
+hm450 = pd.read_csv('data/humanData/Illumina/HM450.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
 hm450 = hm450[hm450['chr'] == chr]
 
 # bed file for EPIC_HM450 unified probe counts
-probe = pd.read_csv('EPIC_HM450_control_table.bed', header=None, names=['chr', 'start', 'end', 'id', 'pcount'], sep="\t")
+probe = pd.read_csv('data/humanData/Illumina/EPIC_HM450_control_table.bed', header=None, names=['chr', 'start', 'end', 'id', 'pcount'], sep="\t")
 probe = probe[probe['chr'] == chr]
 
 # bed file for annotated CoRSIV regions
-corsiv = pd.read_csv("annotated_corsiv_all.csv")
+corsiv = pd.read_csv("data/humanData/corsiv_control/annotated_corsiv_clean.csv")
 bp_set = set(corsiv[corsiv["chr"] == chr]["block_size"])
 
 def get_gene_count(region):

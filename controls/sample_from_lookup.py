@@ -11,7 +11,7 @@ import sys
 input_chr = sys.argv[1]
 
 # Read CoRSIV metrics table and filter for specified chromosome
-df = pd.read_csv('corsiv_table_unique.csv') # unique combinations of CoRSIV metrics, can be obtained from preprocess_corsiv_control.ipynb
+df = pd.read_csv('data/humanData/corsiv_control/corsiv_table_unique.csv') # unique combinations of CoRSIV metrics, can be obtained from process_control.ipynb
 df = df[df["chr"]==input_chr]
 grouped = df.groupby(by=['block_size'])
 
@@ -175,5 +175,4 @@ for block_size_value, group in grouped:
 
 # Save results to files
 results_df = pd.DataFrame(results)
-results_df.to_csv(f"{input_chr}_corsiv_table_collision.csv", index=False)
-df_list.to_csv(f"{input_chr}_control_candidates.csv", index=False) # contains all 10 sets of control regions
+df_list.to_csv(f"{input_chr}_control_candidates.csv", index=False) # contains all 10 sets of control regions, all files for all chromosomes are concatenated into control_candidates.csv
