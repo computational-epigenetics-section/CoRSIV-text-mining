@@ -18,7 +18,7 @@ This is a suite which enables to calculate the enrichment ratios of 100,000 perm
 
 ## Usage
 
-1) Before running this, load Data folder with the following files (directories below are relativ to Zenodo data folder):
+1) Before running this, load Data folder with the following files (directories below are relative to Zenodo data folder):
 
 - `data/humanData/Illumina/EPIC.hg38.txt`
 - `data/humanData/Illumina/HM450.hg38.txt`
