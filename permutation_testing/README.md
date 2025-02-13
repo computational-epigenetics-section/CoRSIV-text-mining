@@ -1,7 +1,8 @@
 # Permutation Testing Suite
 
 Author: Uditha Madurange<br/>
-Baylor College of Medicine<br/>
+Baylor College of Medicine<br/><br/>
+
 This is a suite which enables to calculate the enrichment ratios of 100,000 permuted sets of CoRSIVs and control probes.<br/>
 
 ## File Structure
