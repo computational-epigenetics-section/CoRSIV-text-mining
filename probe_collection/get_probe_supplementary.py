@@ -41,11 +41,11 @@ def get_csv_probes(format):
             cg_probes[study_id].update(probe2)
     data = [{'pmcid': key, 'probeId': probe_id} for key, value in cg_probes.items() for probe_id in value]
     df = pd.DataFrame(data)
-    df.to_csv(f"/storage/waterland/home/u239646/text_mining/probe/{input_cat}_{format}_probes.csv", index=0)
+    df.to_csv(f"probe/{input_cat}_{format}_probes.csv", index=0)
     print(f"[{input_cat} ({format})] Skipped files: {invalid_name}")
 
 def get_excel_probes(format):
-    folder = f"/storage/waterland/home/u239646/text_mining/{input_cat}/{format}"
+    folder = f"{input_cat}/{format}"
     filenames = os.listdir(folder)
     filenames = [f for f in filenames if f.endswith(format)]
     invalid_name = []

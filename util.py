@@ -9,7 +9,8 @@ from matplotlib import ticker
 
 
 PROJECT_PATH = "YOUR DIRECTORY"
-os.chdir(PROJECT_PATH)
+if PROJECT_PATH:
+    os.chdir(PROJECT_PATH)
 CATEGORIES = [["Neoplasms"], ["Cardiovascular Diseases"], ["Digestive System Diseases"], ["Endocrine System Diseases"], ["Hemic and Lymphatic Diseases"], ["Immune System Diseases"], ["Metabolic Diseases"], ["Mental Disorders", "Nervous System Diseases"], ["Obesity"], ["Respiratory Tract Diseases"], ["Urogenital Diseases"]]
 CATEGORY_NAMES = ["cancer", "cardiovascular", "digestive", "endocrine", "hematological", "immune", "metabolic", "neurological", "obesity", "respiratory", "urogenital"]#, "T2D"]
 COLOR_TEMPLATE = ['#e6194B','#f58231','#f3c300','#469990','#808000','#2f8e3b','#0db7dd','#4363d8','#800000','#f032e6','#911eb4']#, "#000075"]#'#8298e5'
@@ -23,7 +24,7 @@ for i in range(1, 11):
     
 def read_in_probes(input_cat):
     cat = "metabolic_diseases" if input_cat == "metabolic" else input_cat
-    df = pd.read_csv(f"probe/{cat}_all_probes.csv")
+    df = pd.read_csv(f"data/probe/{cat}_all_probes.csv")
     probe_list = df["probeId"].to_list()
     c = dict(Counter(probe_list))
     return c
