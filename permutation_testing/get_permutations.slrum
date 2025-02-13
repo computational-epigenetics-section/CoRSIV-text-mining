@@ -1,0 +1,4 @@
+#!/bin/sh
+#SBATCH --time=48:00:00 -n24 -p bynode
+
+python get_permutations.py

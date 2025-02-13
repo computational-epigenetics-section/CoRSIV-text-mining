@@ -1,0 +1,32 @@
+#!/bin/sh
+#SBATCH --time=48:00:00 -n24 -p bynode
+
+for d in "neurological"
+do
+    python p1.py "${d}"
+    python p2.py "${d}"
+    python p3.py "${d}"
+    python p4.py "${d}"
+    python p5.py "${d}"
+    python p6.py "${d}"
+    python p7.py "${d}"
+    python p8.py "${d}"
+    python p9.py "${d}"
+    python p10.py "${d}"
+done
+
+
+
+# for d in "Demyelinating Autoimmune Diseases, CNS" "Multiple Sclerosis" "Autoimmune Diseases of the Nervous System" "Autoimmune Diseases" "Arthritis, Rheumatoid" "Hypersensitivity" "Leukemia, Lymphoid" "Lymphoproliferative Disorders"
+# do
+#     python p1.py "${d}"
+#     python p2.py "${d}"
+#     python p3.py "${d}"
+#     python p4.py "${d}"
+#     python p5.py "${d}"
+#     python p6.py "${d}"
+#     python p7.py "${d}"
+#     python p8.py "${d}"
+#     python p9.py "${d}"
+#     python p10.py "${d}"
+# done

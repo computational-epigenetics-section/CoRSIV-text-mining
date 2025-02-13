@@ -1,0 +1,29 @@
+#!/bin/sh
+#SBATCH --time=48:00:00 -n24 -p bynode
+
+# python concat.py "cancer"
+# python concat.py "cardiovascular"
+# python concat.py "digestive"
+# python concat.py "endocrine"
+# python concat.py "hematological"
+# python concat.py "immune"
+# python concat.py "metabolic"
+python merge_chuncks.py "neurological"
+# python concat.py "obesity"
+# python concat.py "respiratory"
+# python concat.py "urogenital"
+
+# python concat.py "Diabetes Mellitus"
+# python concat.py "Diabetes, Gestational"
+# python concat.py "Hyperinsulinism"
+# python concat.py "Insulin Resistance"
+# python concat.py "Metabolism, Inborn Errors"
+# python concat.py "Diabetes Mellitus, Type 2"
+# python concat.py "Glucose Metabolism Disorders"
+# python concat.py "Lipid Metabolism Disorders"
+
+
+# for d in "Attention Deficit Disorder with Hyperactivity" "Attention Deficit and Disruptive Behavior Disorders" "Neurodevelopmental Disorders" "Anxiety Disorders" "Nervous System Diseases" "Autoimmune Diseases of the Nervous System"
+# do
+#     python concat.py "${d}"
+# done
