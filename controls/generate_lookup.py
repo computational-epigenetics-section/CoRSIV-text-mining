@@ -1,3 +1,11 @@
+"""
+Author: Wen-Jou Chang
+Baylor College of Medicine
+
+This script generates one lookup table for control regions per given region size on a given chromosome. 
+Control regions are later randomly sampled from the respective lookup table based on CoRSIV metrics.
+"""
+
 import pandas as pd
 import numpy as np
 import sys
@@ -5,27 +13,33 @@ import sys
 # parameters
 chr = sys.argv[1] 
 
-gb = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/hg38_gene_bodies.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+# bed file for gene bodies, promoters (padded 3kb), and three prime regions (padded 3kb), all obtained from UCSC
+gb = pd.read_csv('hg38_gene_bodies.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 gb = gb[gb['chr'] == chr]
 
-fivep = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/hg38_promoters_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+fivep = pd.read_csv('hg38_promoters_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 fivep = fivep[fivep['chr'] == chr]
 
-threep = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/hg38_three_prime_region_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
+threep = pd.read_csv('hg38_three_prime_region_3kb.tab.txt', header=None, names=['chr', 'start', 'end', 'ensg', 'gene'], sep="\t")
 threep = threep[threep['chr'] == chr]
 
-bins = pd.read_csv(f"/storage/waterland/home/u239646/text_mining/control/data/{chr}_no_corsiv.csv")
+# 100bp bin-level annotation of CpG counts, TSS counts, GB counts, EPIC probe counts, bins overlapping CoRSIVs removed 
+bins = pd.read_csv(f"{chr}_no_corsiv.csv")
 
-epic = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/EPIC.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
+# bed file for EPIC probes
+epic = pd.read_csv('EPIC.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
 epic = epic[epic['chr'] == chr]
 
-hm450 = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/HM450.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
+# bed file for HM450 probes
+hm450 = pd.read_csv('HM450.hg38.txt', header=None, names=['chr', 'start', 'end', 'id'], sep="\t")
 hm450 = hm450[hm450['chr'] == chr]
 
-probe = pd.read_csv('/storage/waterland/home/u239646/text_mining/control/data/EPIC_HM450_control_table.bed', header=None, names=['chr', 'start', 'end', 'id', 'pcount'], sep="\t")
+# bed file for EPIC_HM450 unified probe counts
+probe = pd.read_csv('EPIC_HM450_control_table.bed', header=None, names=['chr', 'start', 'end', 'id', 'pcount'], sep="\t")
 probe = probe[probe['chr'] == chr]
 
-corsiv = pd.read_csv("/storage/waterland/home/u239646/text_mining/control/data/annotated_corsiv_all.csv")
+# bed file for annotated CoRSIV regions
+corsiv = pd.read_csv("annotated_corsiv_all.csv")
 bp_set = set(corsiv[corsiv["chr"] == chr]["block_size"])
 
 def get_gene_count(region):
@@ -65,7 +79,7 @@ def build_lookup(block_size):
         records.append(record)
 
     df = pd.DataFrame(records)
-    df.to_csv(f'/storage/waterland/home/u239646/text_mining/control/table/{chr}_{block_size}bp_control_table.csv', index=False)
+    df.to_csv(f'{chr}_{block_size}bp_control_table.csv', index=False)
 
 for bp in bp_set:
     build_lookup(bp)
