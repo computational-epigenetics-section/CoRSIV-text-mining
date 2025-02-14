@@ -27,8 +27,6 @@ Repository containing code and analyses for the paper "Human systemic epigenetic
 - `supplementary_figure_code.ipynb` - Code to generate supplementary figures.
 - `util.py` - Utility functions used in the above scripts.
 
-Note: The `data/` directory contains all the data files used in the analysis, but are not included in the repository due to size constraints. Please refer to the [Zenodo](ZENODO LINK INSERT) link for the data files.
-
 ## Requirements
 
 - Python 3.7+
