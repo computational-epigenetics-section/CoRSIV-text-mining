@@ -1,5 +1,6 @@
 # CoRSIV-text-mining
-Public facing repository containing the code and analyses for paper titled: Human systemic epigenetic variants are strongly implicated in neurodevelopmental and metabolic disorders.
+
+Repository containing code and analyses for the paper "Human systemic epigenetic variants are implicated in neurodevelopmental and metabolic disorders". 
 
 
 ## Repository Structure
